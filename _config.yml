@@ -24,10 +24,10 @@ repository               : "AndyXie-google/Andyxie-google.github.io"
 author:
   # Biographic information
   avatar           : "profile.png"
-  name             : "Your Sidebar Name"
+  name             : "AndyXie"
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
-  location         : "Earth"
+  bio              : # "Short biography for the left-hand sidebar"
+  location         : "Changsha, China"
   employer         : "HNU"
   uri              : # URL
   email            : "xierabbit@qq.com" 
