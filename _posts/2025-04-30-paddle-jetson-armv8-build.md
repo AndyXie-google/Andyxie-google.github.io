@@ -6,8 +6,6 @@ series: PaddlePaddle工程实战连载
 status: 可发布
 ---
 
-### `paddle+jetsonorin`端侧目标识别模型部署(1): `paddlepaddle-gpu`在`armv8`架构开发板上的编译
-
 > [!TIP]
 > 本文为实操记录向内容，包含环境、编译命令与报错处理。
 
@@ -16,7 +14,7 @@ status: 可发布
 
 ---
 
-#### 为什么要编译
+## 为什么要编译
 如果想要在`x86_64`的PC端或没有独立`gpu`的`arm`开发板部署paddlepaddle框架, 可以直接前往[飞桨快速安装](https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/develop/install/pip/linux-pip.html), 无需编译
 
 如果nvidia嵌入式开发板上面安装了`jetpack 5-1-2`(`jetpack`相关问题, 前往[这里](./01A_jetpack版本兼容与刷机说明.md))可以安装官方已经编译好的[`paddlepaddle-gpu 3.0.0`whl文件](https://www.paddlepaddle.org.cn/inference/v3.0/guides/install/download_lib.html#python)
@@ -28,7 +26,7 @@ status: 可发布
 
 ---
 
-#### 编译环境
+## 编译环境
 **硬件配置**: `jetson orin nano 4g/8g(super)` 开发板一块
 **软件配置**(可以跟我的不一样): 
   - `jetpack 6.2`(内置`cuda 12.6`, `cudnn 9.3`, `ubuntu 22.04`)
@@ -44,7 +42,7 @@ status: 可发布
 ---
 
 
-#### `swap`将ssd硬盘空间划分为虚拟内存
+## `swap`将ssd硬盘空间划分为虚拟内存
 ```bash
 df -h # 查看当前机器的剩余磁盘空间
 ```
@@ -66,7 +64,7 @@ free -h # 设置完成, 查看当前swap使用情况
 
 ---
 
-#### 开始编译
+## 开始编译
 <mark>如果编译出错建议完整清除build文件夹, 否则新一次编译可能再次报错!</mark>
 ```bash
 rm -rf ./build
@@ -93,7 +91,7 @@ make -j6  # jetson orin nano共6核, 且不能超线程;
 
 ---
 
-#### 可能出现的问题
+## 可能出现的问题
 **错误1**: github连接不畅, 编译的时候老是报`connection timeout`, 没啥别的办法, 下载是概率性问题, 多跑几次cmake命令就下全了, 或者戳这里看如何[安装dev-sidecar并设置反向代理](./01B_dev-sidecar安装与反向代理说明.md)
 
 **错误2**: 老是弹`c++: error: unrecognized command-line option ‘-mmmx’`之类的错误, 但是实际上gcc编译器支持`mmmx`指令集; 原因: 没有禁用 NCLL : `-DWITH_NCCL=OFF`
@@ -119,7 +117,7 @@ make -j6
 ```
 ---
 
-#### 参考资料
+## 参考资料
 - 感谢飞桨官方的[linux编译指南](https://www.paddlepaddle.org.cn/inference/v3.0/guides/install/compile/source_compile_under_Linux.html)
 - 感谢知乎大佬`pprffh`[Jetson Jetpack6.2中编译安装基于Python API的 Paddle Inference GPU 3.0 (同时生成C/C++ API安装包)](https://zhuanlan.zhihu.com/p/30190018963)的编译教程
 - 感谢[JetsonOrin源码安装部署PaddlePaddle](https://blog.csdn.net/qq_38418182/article/details/146257152)
