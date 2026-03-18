@@ -15,6 +15,11 @@
             {% endif %}
             <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
+          <li class="masthead__menu-item persist tail" id="masthead-search-toggle">
+            <a role="button" aria-label="展开搜索" aria-controls="masthead-search-panel" aria-expanded="false">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+          </li>
           <li id="theme-toggle" class="masthead__menu-item persist tail">
             <a role="button" aria-labelledby="theme-icon"><i id="theme-icon" class="fa-solid fa-sun" aria-hidden="true" title="toggle theme"></i></a>
           </li>
@@ -22,5 +27,186 @@
         <ul class="hidden-links hidden"></ul>
       </nav>
     </div>
+
+    <div id="masthead-search-panel" class="masthead-search-panel" hidden>
+      <input id="masthead-search-input" type="search" placeholder="搜索文章标题、标签、摘要" autocomplete="off" />
+      <p id="masthead-search-count">输入关键词开始搜索。</p>
+      <ul id="masthead-search-results"></ul>
+    </div>
   </div>
 </div>
+
+<style>
+  .masthead__inner-wrap {
+    position: relative;
+  }
+
+  .masthead-search-panel {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: min(680px, 96vw);
+    margin-top: 0.5rem;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.16);
+    z-index: 1000;
+    padding: 0.8rem;
+  }
+
+  #masthead-search-input {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 0.65rem 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  #masthead-search-count {
+    margin: 0.6rem 0 0.4rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+  }
+
+  #masthead-search-results {
+    max-height: 50vh;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #masthead-search-results li {
+    padding: 0.55rem 0;
+    border-top: 1px solid #eef1f4;
+  }
+
+  .masthead-search-title {
+    font-weight: 600;
+  }
+
+  .masthead-search-meta {
+    color: #6b7280;
+    font-size: 0.86rem;
+    margin-top: 0.15rem;
+  }
+
+  .masthead-search-excerpt {
+    color: #374151;
+    font-size: 0.9rem;
+    margin-top: 0.15rem;
+  }
+</style>
+
+<script>
+  (function () {
+    var toggle = document.getElementById("masthead-search-toggle");
+    var toggleLink = toggle ? toggle.querySelector("a") : null;
+    var panel = document.getElementById("masthead-search-panel");
+    var input = document.getElementById("masthead-search-input");
+    var count = document.getElementById("masthead-search-count");
+    var results = document.getElementById("masthead-search-results");
+
+    if (!toggle || !toggleLink || !panel || !input || !count || !results) {
+      return;
+    }
+
+    var docs = [
+      {% for post in site.posts %}
+      {
+        title: {{ post.title | jsonify }},
+        url: {{ post.url | relative_url | jsonify }},
+        date: {{ post.date | date: "%Y-%m-%d" | jsonify }},
+        tags: {{ post.tags | join: " " | jsonify }},
+        content: {{ post.content | strip_html | strip_newlines | truncate: 180 | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
+
+    function render(items) {
+      results.innerHTML = "";
+      if (!items.length) {
+        count.textContent = "没有匹配结果。";
+        return;
+      }
+
+      count.textContent = "找到 " + items.length + " 条结果。";
+      items.forEach(function (item) {
+        var li = document.createElement("li");
+
+        var title = document.createElement("a");
+        title.href = item.url;
+        title.className = "masthead-search-title";
+        title.textContent = item.title;
+
+        var meta = document.createElement("div");
+        meta.className = "masthead-search-meta";
+        meta.textContent = item.date + (item.tags ? " | " + item.tags : "");
+
+        var excerpt = document.createElement("div");
+        excerpt.className = "masthead-search-excerpt";
+        excerpt.textContent = item.content;
+
+        li.appendChild(title);
+        li.appendChild(meta);
+        li.appendChild(excerpt);
+        results.appendChild(li);
+      });
+    }
+
+    function closePanel() {
+      panel.hidden = true;
+      toggleLink.setAttribute("aria-expanded", "false");
+    }
+
+    function openPanel() {
+      panel.hidden = false;
+      toggleLink.setAttribute("aria-expanded", "true");
+      input.focus();
+    }
+
+    toggleLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      if (panel.hidden) {
+        openPanel();
+      } else {
+        closePanel();
+      }
+    });
+
+    input.addEventListener("input", function (event) {
+      var q = (event.target.value || "").trim().toLowerCase();
+      if (!q) {
+        results.innerHTML = "";
+        count.textContent = "输入关键词开始搜索。";
+        return;
+      }
+
+      var filtered = docs.filter(function (doc) {
+        var haystack = (doc.title + " " + doc.tags + " " + doc.content).toLowerCase();
+        return haystack.indexOf(q) !== -1;
+      });
+
+      render(filtered);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        closePanel();
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      if (panel.hidden) {
+        return;
+      }
+
+      if (panel.contains(event.target) || toggle.contains(event.target)) {
+        return;
+      }
+
+      closePanel();
+    });
+  })();
+</script>
