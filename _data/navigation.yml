@@ -19,10 +19,16 @@ main:
     
   # - title: "Portfolio"
   #   url: /portfolio/
-        
+
+  # - title: "blog-post"
+  #   url: /year-archive/
+
   - title: "文章"
     url: /year-archive/
-    
+  
+  - title: "介绍"
+    url: /about/
+
   # - title: "CV"
   #   url: /cv/
     

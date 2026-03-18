@@ -1,5 +1,5 @@
 ---
-title: paddle+jetson端侧目标识别模型部署(1): paddlepaddle-gpu在armv8架构开发板上的编译
+title: paddle+jetson端侧目标识别模型部署(1)_paddlepaddle-gpu在armv8架构开发板上的编译
 date: 2025-04-30
 tags: [PaddlePaddle, Jetson, 工程化, 部署]
 series: PaddlePaddle工程实战连载

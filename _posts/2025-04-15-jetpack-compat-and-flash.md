@@ -1,20 +1,18 @@
 ---
-title: jetpack相关问题补充：版本兼容与刷机选择
+title: jetpack相关问题补充_版本兼容与刷机选择
 date: 2025-04-15
 tags: [Jetson, JetPack, 刷机, 兼容性]
 series: PaddlePaddle工程实战连载
 status: 可发布
 ---
 
-### jetpack相关问题补充：版本兼容与刷机选择
-
-> [!WARNING]
 > ⚠️ 刷机涉及固件与镜像匹配，操作前请先确认板卡版本信息。
 
-#### 目录
-- [什么是jetpack](#what-is-jetpack)
-- [刷机注意事项: 更新固件](#flash-notes)
-- [相关链接](#links)
+## 目录
+- [目录](#目录)
+    - [什么是`jetpack`](#什么是jetpack)
+    - [刷机注意事项: 更新固件](#刷机注意事项-更新固件)
+    - [相关链接](#相关链接)
 
 ---
 

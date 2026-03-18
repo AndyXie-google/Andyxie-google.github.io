@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>简历</title>
+  <style>
+    :root {
+      --page-bg: #f1f2f4;
+      --paper: #ffffff;
+      --ink: #222222;
+      --muted: #666666;
+      --line: #d8dbe0;
+      --title: #1f2937;
+      --accent: #0f766e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%, #e9eef6 0, transparent 40%),
+        radial-gradient(circle at 85% 90%, #e9f3ef 0, transparent 35%),
+        var(--page-bg);
+      line-height: 1.55;
+    }
+
+    .page {
+      width: min(960px, 95vw);
+      margin: 24px auto;
+      background: var(--paper);
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 140px;
+      gap: 20px;
+      align-items: center;
+      padding: 26px 30px 20px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    }
+
+    .hero-info {
+      text-align: center;
+    }
+
+    .name {
+      margin: 0;
+      font-size: 34px;
+      letter-spacing: 1px;
+      color: var(--title);
+      font-weight: 800;
+    }
+
+    .meta {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .meta strong {
+      color: #374151;
+      font-weight: 700;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 150px;
+      justify-self: end;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, #dbeafe, #fde68a);
+      overflow: hidden;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .section {
+      padding: 16px 30px 8px;
+    }
+
+    .section h2 {
+      margin: 8px 0 10px;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--title);
+      letter-spacing: 1px;
+    }
+
+    .rule {
+      border-top: 1px solid var(--line);
+      margin-bottom: 14px;
+    }
+
+    .bullets {
+      margin: 0;
+      padding-left: 22px;
+      list-style: disc;
+    }
+
+    .bullets li {
+      margin-bottom: 7px;
+      color: #32363c;
+    }
+
+    .project {
+      margin-bottom: 18px;
+    }
+
+    .project-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .project-title {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 800;
+      color: #2a2f38;
+    }
+
+    .role {
+      margin-left: 8px;
+      font-size: 16px;
+      color: #4b5563;
+      font-weight: 600;
+    }
+
+    .time {
+      color: #6b7280;
+      font-weight: 500;
+      white-space: nowrap;
+      font-size: 16px;
+    }
+
+    .label {
+      margin: 6px 0;
+      color: #374151;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .number-list {
+      margin: 0;
+      padding-left: 24px;
+    }
+
+    .number-list li {
+      margin-bottom: 5px;
+    }
+
+    .award {
+      margin: 6px 0 0;
+      color: #1f2937;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .edu-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1f2937;
+      padding: 4px 0 8px;
+    }
+
+    .edu-meta {
+      color: #4b5563;
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .avatar {
+        justify-self: start;
+      }
+
+      .section h2 {
+        font-size: 23px;
+      }
+
+      .project-title {
+        font-size: 20px;
+      }
+
+      .time {
+        font-size: 14px;
+      }
+
+      .label,
+      .award,
+      .edu-row {
+        font-size: 16px;
+      }
+
+      .role,
+      .edu-meta {
+        font-size: 14px;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="hero-info">
+        <h1 class="name">AndyXie</h1>
+        <div class="meta">
+          男 | 年龄：20岁 | 18573173715 | xierabbit@qq.com<br />
+          <strong>求职意向：</strong>嵌入式工程师 | <strong>期望城市：</strong>深圳
+        </div>
+      </div>
+      <!-- <div class="avatar"><img src="photo.jpg" alt="证件照" /></div> -->
+    </section>
+
+    <section class="section">
+      <h2>教育经历</h2>
+      <div class="rule"></div>
+      <div class="edu-row">
+        <div>湖南大学 <span class="edu-meta">本科 | 自动化</span></div>
+        <div class="edu-meta">2023-2027</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>个人优势</h2>
+      <div class="rule"></div>
+      <ul class="bullets">
+        <li>CET-6 630分（全国前2%），能够熟练阅读英文文档，口语流利，具备英文技术交流能力。</li>
+        <li>熟悉 Python，能够运用 numpy、scipy、sympy 求解微分方程、数值积分、矩阵等科学运算问题；使用 selenium 库进行网页爬取和自动化测试；运用 paddlepaddle、pytorch 等深度学习框架进行简单神经网络搭建与微调。</li>
+        <li>熟悉 C/C++，掌握 STL 模板库以及栈、队列等数据结构，了解 malloc 和指针操作。</li>
+        <li>了解 Linux 指令，在 Ubuntu/OpenEuler/RHEL8 下进行机器视觉模型部署、多线程应用开发以及下位机通讯。</li>
+        <li>了解单片机通过 UART、I2C、SPI、GPIO、DMA 等接口与外设通信的原理与方法。</li>
+        <li>了解 FreeRTOS、NuttX 等嵌入式操作系统中的任务创建和基本调度。</li>
+        <li>了解 ROS，能够将 urdf 模型导入 gazebo 进行仿真，使用 slam 定位建图，使用 navigation2 导航。</li>
+        <li>了解集成电路基本元件功能，能够使用热风枪进行贴片电阻/电容/芯片焊接。</li>
+        <li>了解机器学习基本方法，如支持向量机、逻辑回归、聚类分析等。</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>荣誉奖项</h2>
+      <div class="rule"></div>
+      <ul class="bullets">
+        <li>2025年全国大学生智能汽车竞赛百度创意组国赛二等奖</li>
+        <li>2024年湖南大学本科生一等奖学金</li>
+        <li>2024年湖南大学本科生单项奖学金</li>
+        <li>2024“高教社杯”全国大学生数学建模竞赛湖南赛区二等奖</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>项目经历</h2>
+      <div class="rule"></div>
+
+      <article class="project">
+        <header class="project-head">
+          <p class="project-title">STM32+PX4多旋翼无人机设计 <span class="role">实习生</span></p>
+          <span class="time">2025.09-2025.12</span>
+        </header>
+        <p class="label">项目概述：</p>
+        <ul class="bullets">
+          <li>目标：实现农用无人机根据预设航点自动导航，进行农药喷撒，并能够根据实时速度调节药筒阀门，控制农药流量。</li>
+          <li>上位机：使用 STM32H743 系列 ARM 芯片，烧录开源飞控固件 PX4 + NuttX 操作系统，通过 mavlink 协议和地面站 QGC 进行通讯。</li>
+          <li>地面站：个人电脑安装 WSL-Ubuntu 22.04 + QGC 地面站。</li>
+        </ul>
+        <p class="label">技术要点：</p>
+        <ul class="bullets">
+          <li>通过 ROS2 + gazebo 进行无人机系统仿真调试（起飞/降落/移动指令的单条执行和组合执行）。</li>
+          <li>在编译 PX4 项目时自定义 uorb 消息以实现 NuttX 系统自定义应用进程间通信。</li>
+          <li>重新编译 QGC 应用，修改并部署标准 mavlink 协议库以实现飞控和地面站点到点通信。</li>
+          <li>上位机（路径规划 + 地面站通讯）通过串口/数传电台将 mavlink 消息转发到下位机（运动控制 + 农药喷洒控制）。</li>
+        </ul>
+      </article>
+
+      <article class="project">
+        <header class="project-head">
+          <p class="project-title">使用开源方案组装小型无人机 <span class="role">队长</span></p>
+          <span class="time">2025.08-2025.10</span>
+        </header>
+        <ul class="bullets">
+          <li>采用esp32+开源飞控flix+空心杯电机设计无人机, 采购、焊接、对应pcb和芯片元件, 完成小型4旋翼无人机的组装
+          <li>烧录开源飞控固件，调试 PID 参数，实现飞行稳定控制。</li>
+        </ul>
+      </article>
+
+      <article class="project">
+        <header class="project-head">
+          <p class="project-title">全国大学生智能车竞赛 <span class="role">队长</span></p>
+          <span class="time">2024.09-2025.08</span>
+        </header>
+        <p class="label">内容：</p>
+        <ol class="number-list">
+          <li>自行设计和组装车模，使用 Jetson Orin Nano 上位机和单片机下位机控制小车全国巡航和完成规定任务。</li>
+          <li>使用国产深度学习库 paddlepaddle 进行模型微调、训练和部署，使用 Jetson 内置 GPU。</li>
+          <li>全图巡航使用 Jetson 边缘部署卷积神经网络，实现赛道识别和路径规划。</li>
+          <li>根据底盘尺寸参数将底盘速度解算为电机速度，实现开环控制；再通过多次调参 PID 参数实现闭环控制，并封装函数供主进程调用；结合霍尔感应器和红外检测器实现机械臂位移精准控制和任务区域检测。</li>
+          <li>使用百度飞桨平台云端服务训练模型，通过调整学习率衰减策略和优化器类型，训练出效果较好的模型。</li>
+          <li>Clone paddlepaddle 源码，在 Ubuntu 配置环境（6 核 CPU、24G 虚拟内存）编译 paddlepaddle-gpu 库进行模型部署。</li>
+        </ol>
+        <p class="label">业绩：</p>
+        <p class="award">2025 全国大学生智能汽车竞赛百度创意组东部赛区选拔赛一等奖</p>
+        <p class="award">2025 全国大学生智能汽车竞赛百度创意组国赛二等奖</p>
+      </article>
+
+      <article class="project">
+        <header class="project-head">
+          <p class="project-title">数学建模国赛 <span class="role">队长</span></p>
+          <span class="time">2024.07-2024.09</span>
+        </header>
+        <p class="label">内容：</p>
+        <ol class="number-list">
+          <li>将“板凳龙”螺旋芯盘入、盘出、调头等运动转化为基于阿基米德螺线的板凳状态和碰撞检测问题。</li>
+          <li>使用 Python 分析静止状态下板凳龙，建立极坐标系并递推求解全部板凳位置。</li>
+          <li>采用微元思想分析动态盘入，利用离散状态逼近连续运动状态进行碰撞检测。</li>
+          <li>使用模拟退火算法，求解最大允许龙头速度。</li>
+        </ol>
+        <p class="label">业绩：</p>
+        <p class="award">2024 “高教社杯”全国大学生数学建模竞赛湖南赛区二等奖</p>
+      </article>
+
+      <article class="project">
+        <header class="project-head">
+          <p class="project-title">数学建模校赛 <span class="role">队长</span></p>
+          <span class="time">2023.12-2024.01</span>
+        </header>
+        <p class="label">内容：</p>
+        <ol class="number-list">
+          <li>将玩家航海、补给、挖矿等游戏决策转化为有权连通图上的非线性整数规划问题。</li>
+          <li>担任队长兼编程手，参与建模、编写全部源码、校对并撰写部分论文。</li>
+          <li>将场景转换为最短路径问题，并使用 Python 编写算法验证方案可行性。</li>
+          <li>使用 LINGO 与 Python（cvxpy）求解不等式约束下的最优规划问题。</li>
+        </ol>
+        <p class="label">业绩：</p>
+        <p class="award">2023 年湖南大学“冬季杯”数学建模竞赛 A 题第一名</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
