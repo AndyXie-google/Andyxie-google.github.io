@@ -10,7 +10,7 @@ series: Transformer基础分享
 status: 可发布
 ---
 
-# Transformer 基础分享：词嵌入
+<!-- # Transformer 基础分享：词嵌入 -->
 
 
 ## 1. 概念速览（表格）

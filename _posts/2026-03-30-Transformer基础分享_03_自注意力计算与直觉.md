@@ -10,7 +10,7 @@ series: Transformer基础分享
 status: 可发布
 ---
 
-# Transformer 基础分享：自注意力计算与直觉
+<!-- # Transformer 基础分享：自注意力计算与直觉 -->
 
 > 本节回答四个问题：  
 > 1) 三分天下之后，Q/K/V 如何相互作用？  

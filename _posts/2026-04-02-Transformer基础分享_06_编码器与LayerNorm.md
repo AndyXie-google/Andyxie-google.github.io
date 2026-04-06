@@ -1,5 +1,5 @@
 ---
-title: Transformer基础分享_编码器与LayerNorm
+title: Transformer基础分享_06_编码器与LayerNorm
 date: 2026-04-02
 tags:
   - Transformer
@@ -9,7 +9,7 @@ tags:
 status: 可发布
 ---
 
-# Transformer 基础分享：编码器与 LayerNorm（发布版）
+<!-- # Transformer 基础分享：编码器与 LayerNorm（发布版） -->
 
 > 本节目标：
 > 1) 讲清 BN 与 LN 的统计维度差异；
@@ -37,9 +37,9 @@ $$
 X\in\mathbb{R}^{10\times28\times28\times3}
 $$
 
-- \(10\)：batch size
-- \(28,28\)：空间尺寸
-- \(3\)：通道数
+- \\(10\\)：batch size
+- \\(28,28\\)：空间尺寸
+- \\(3\\)：通道数
 
 ### 2.1 Batch Normalization（BN）
 
@@ -60,13 +60,13 @@ $$
 X\in\mathbb{R}^{B\times T\times D}
 $$
 
-- \(B\)：batch size
-- \(T\)：序列长度
-- \(D\)：嵌入维度
+- \\(B\\)：batch size
+- \\(T\\)：序列长度
+- \\(D\\)：嵌入维度
 
-LN 的常见做法是：对每个 token 的最后一维 \(D\) 单独归一化。
+LN 的常见做法是：对每个 token 的最后一维 \\(D\\) 单独归一化。
 
-对某个样本第 \(t\) 个 token：
+对某个样本第 \\(t\\) 个 token：
 
 $$
 \mu_{b,t}=\frac{1}{D}\sum_{i=1}^{D}X_{b,t,i},
@@ -80,7 +80,7 @@ $$
 
 > **辅助理解举例（数值演算版）：**
 > 
-> 假设有一个输入张量 \(X \in \mathbb{R}^{2\times3}\)，表示 2 个 token，每个 token 3 维特征：
+> 假设有一个输入张量 \\(X \in \mathbb{R}^{2\times3}\\)，表示 2 个 token，每个 token 3 维特征：
 > 
 > $$
 > X = \begin{bmatrix}
@@ -91,23 +91,23 @@ $$
 > 
 > 对第 1 个 token（第 1 行）做 LayerNorm：
 > 
-> - 均值 \(\mu_1 = (1+2+3)/3 = 2\)
-> - 方差 \(\sigma_1^2 = [(1-2)^2 + (2-2)^2 + (3-2)^2]/3 = (1+0+1)/3 = 0.666...\)
+> - 均值 \\(\mu_1 = (1+2+3)/3 = 2\\)
+> - 方差 \\(\sigma_1^2 = [(1-2)^2 + (2-2)^2 + (3-2)^2]/3 = (1+0+1)/3 = 0.666...\\)
 > - 归一化后：
->   - \(z_1 = (1-2)/\sqrt{0.666...+\varepsilon}\)
->   - \(z_2 = (2-2)/\sqrt{0.666...+\varepsilon}\)
->   - \(z_3 = (3-2)/\sqrt{0.666...+\varepsilon}\)
+>   - \\(z_1 = (1-2)/\sqrt{0.666...+\varepsilon}\\)
+>   - \\(z_2 = (2-2)/\sqrt{0.666...+\varepsilon}\\)
+>   - \\(z_3 = (3-2)/\sqrt{0.666...+\varepsilon}\\)
 > 
 > 对第 2 个 token（第 2 行）同理：
 > 
-> - 均值 \(\mu_2 = (4+5+6)/3 = 5\)
-> - 方差 \(\sigma_2^2 = [(4-5)^2 + (5-5)^2 + (6-5)^2]/3 = (1+0+1)/3 = 0.666...\)
+> - 均值 \\(\mu_2 = (4+5+6)/3 = 5\\)
+> - 方差 \\(\sigma_2^2 = [(4-5)^2 + (5-5)^2 + (6-5)^2]/3 = (1+0+1)/3 = 0.666...\\)
 > - 归一化后：
->   - \(z_4 = (4-5)/\sqrt{0.666...+\varepsilon}\)
->   - \(z_5 = (5-5)/\sqrt{0.666...+\varepsilon}\)
->   - \(z_6 = (6-5)/\sqrt{0.666...+\varepsilon}\)
+>   - \\(z_4 = (4-5)/\sqrt{0.666...+\varepsilon}\\)
+>   - \\(z_5 = (5-5)/\sqrt{0.666...+\varepsilon}\\)
+>   - \\(z_6 = (6-5)/\sqrt{0.666...+\varepsilon}\\)
 > 
-> 这样，每个 token 的 3 维特征都被单独归一化，均值为 0，方差为 1（理想情况下 \(\varepsilon\) 很小可忽略）。
+> 这样，每个 token 的 3 维特征都被单独归一化，均值为 0，方差为 1（理想情况下 \\(\varepsilon\\) 很小可忽略）。
 
 ---
 
@@ -192,7 +192,7 @@ $$
 
 ### FFN 数学表示
 
-给定输入 \(X \in \mathbb{R}^{n \times d}\)（\(n\) 为 token 数，\(d\) 为特征维度），采用 ReLU 激活函数，FFN 的计算方式如下：
+给定输入 \\(X \in \mathbb{R}^{n \times d}\\)（\\(n\\) 为 token 数，\\(d\\) 为特征维度），采用 ReLU 激活函数，FFN 的计算方式如下：
 
 $$
 \mathrm{FFN}(X) = \max(0, XW_1 + b_1)W_2 + b_2
@@ -200,10 +200,10 @@ $$
 
 其中：
 
-- \(W_1 \in \mathbb{R}^{d \times 4d}\)：第一层全连接层权重矩阵，通常将维度扩展 4 倍（经验设置，激活函数会带来信息筛选；若使用 ReLU，负半轴会被截断）；
-- \(b_1 \in \mathbb{R}^{4d}\)：第一层偏置项；
-- \(W_2 \in \mathbb{R}^{4d \times d}\)：第二层权重矩阵，将扩展的维度降回 \(d\)；
-- \(b_2 \in \mathbb{R}^{d}\)：第二层偏置项；
+- \\(W_1 \in \mathbb{R}^{d \times 4d}\\)：第一层全连接层权重矩阵，通常将维度扩展 4 倍（经验设置，激活函数会带来信息筛选；若使用 ReLU，负半轴会被截断）；
+- \\(b_1 \in \mathbb{R}^{4d}\\)：第一层偏置项；
+- \\(W_2 \in \mathbb{R}^{4d \times d}\\)：第二层权重矩阵，将扩展的维度降回 \\(d\\)；
+- \\(b_2 \in \mathbb{R}^{d}\\)：第二层偏置项；
 - ReLU（或 GELU）：非线性激活函数。
 
 > 目前很多大模型会把偏置项去掉，若无偏置，公式可简化为：
@@ -234,14 +234,14 @@ $$
 \mathrm{FFN}(X) = \mathrm{ReLU}(XW_1)W_2
 $$
 
-如果把 FFN 的 \(W_1\) 看作“键矩阵”，\(W_2\) 看作“值矩阵”，并把 softmax 与激活函数都抽象为某种选择函数 \(f\)，可写成近似形式：
+如果把 FFN 的 \\(W_1\\) 看作“键矩阵”，\\(W_2\\) 看作“值矩阵”，并把 softmax 与激活函数都抽象为某种选择函数 \\(f\\)，可写成近似形式：
 $$
 \mathrm{FFN}(X) = f(xK^T)V
 $$
 
-输入 \(x\) 与每个 \(k_i\) 点乘后得到系数（memory coefficient），再对对应的 \(v_i\) 加权求和得到输出。这个过程与 QKV 点乘注意力有相似性，但两者有关键区别：
+输入 \\(x\\) 与每个 \\(k_i\\) 点乘后得到系数（memory coefficient），再对对应的 \\(v_i\\) 加权求和得到输出。这个过程与 QKV 点乘注意力有相似性，但两者有关键区别：
 
-- Attention 的计算是 context-dependent 的：\(Q,K,V\) 都来自当前输入表示，随上下文变化；FFN 的“KV”是 context-independent 的，来自固定的可学习参数矩阵。
+- Attention 的计算是 context-dependent 的：\\(Q,K,V\\) 都来自当前输入表示，随上下文变化；FFN 的“KV”是 context-independent 的，来自固定的可学习参数矩阵。
 
 - Attention 常用 softmax（normalized），而 FFN 常用 ReLU/GELU（unnormalized）。
 
@@ -250,7 +250,7 @@ $$
 ### FFN 与 Attention 的非线性分工
 Attention 通过 softmax 引入非线性变换，那么 FFN 为什么还要引入非线性呢？
 
-根据公式，Attention 中 softmax 对 \(q\) 和 \(k\) 的匹配分数进行非线性变换；但对 \(v\) 本身并不做逐元素非线性处理，每次计算更接近“对 value 向量做加权平均”。
+根据公式，Attention 中 softmax 对 \\(q\\) 和 \\(k\\) 的匹配分数进行非线性变换；但对 \\(v\\) 本身并不做逐元素非线性处理，每次计算更接近“对 value 向量做加权平均”。
 
 另外，softmax 的核心作用是权重归一化，而 FFN 中 ReLU/GELU 的核心作用是提升特征变换的表达能力。两类非线性作用位置不同、目的也不同。
 
